@@ -37,7 +37,7 @@ export const Projects = () => {
         // Function to fetch projects from the API
         const fetchData = async () => {
             try {
-                // Send GET request to "/projects" endpoint
+                // Send GET request to "/all-projects" endpoint
                 const response = await axiosInstance.get("/api/project/all-projects");
                 // Save fetched projects in state to display them
                 setProjects(response.data);

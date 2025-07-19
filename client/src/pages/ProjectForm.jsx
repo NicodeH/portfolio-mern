@@ -110,7 +110,7 @@ const ProjectForm = () => {
         res = await axiosInstance.put(`/api/project/update/${id}`, formData);
       }
       toast.success(res.data.message, { position: "top-right" }); // Show success message
-      navigate("/projects"); // Redirect user to projects list
+      navigate("/all-projects"); // Redirect user to projects list
     } catch (error) {
       // Show error message if submit fails
       console.error("Submit error:", error.response?.data || error.message);
@@ -126,7 +126,7 @@ const ProjectForm = () => {
         onSubmit={submitForm}
       >
         {/* Link to go back to project list */}
-        <Link to="/projects" className="absolute top-4 left-4 flex items-center text-sm text-gray-600 hover:text-primary transition">
+        <Link to="/all-projects" className="absolute top-4 left-4 flex items-center text-sm text-gray-600 hover:text-primary transition">
           <ArrowLeftFromLine className="w-4 h-4 mr-1" />
           Back
         </Link>

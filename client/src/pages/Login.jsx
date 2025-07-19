@@ -46,7 +46,7 @@ export const Login = ({ onLoginSuccess }) => {
 			// Show success toast message
 			toast.success("Logged in successfully");
 
-			// Redirect to the /projects page
+			// Redirect to the /all-projects page
 			navigate("/all-projects");
 		} catch (error) {
 			// Show error toast if login fails

@@ -28,11 +28,11 @@ function App() {
         <Routes> 
           {/* Route for the home page ("/") */}
           <Route path="/" element={<Home />}/> 
-          {/* Route for the projects page ("/projects") */}
+          {/* Route for the projects page ("/all-projects") */}
           <Route path="/all-projects" element={<Projects />}/> 
-          {/* Route to add form project ("/projects/add") */}
+          {/* Route to add form project ("/new-project") */}
           <Route path="/new-project" element={<ProjectForm />}/> 
-          {/* Route for a project page ("/projects") */}
+          {/* Route for a project page ("/project/:id") */}
           <Route path="/project/:id" element={<ProjectForm />}/> 
           {/* Route for a login form ("/login") */}
           <Route path="/login" element={<Login onLoginSucess={setToken} />} />
