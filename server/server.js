@@ -19,7 +19,7 @@ const app = express(); // Create an Express app (the web server)
 dotenv.config(); // Load environment variables from a .env file
 
 app.use(cors({
-  origin: "https://portfolio-mern-frontend-qs8o.onrender.com", // URL front-end part
+  origin: "https://portfolio-mern-frontend-ll70.onrender.com", // URL front-end part
 })); // Enable CORS so the API can be accessed from other domains (like your frontend)
 
 app.use(bodyParser.json()); // Tell Express to parse incoming JSON request bodies
