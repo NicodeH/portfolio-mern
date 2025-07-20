@@ -45,7 +45,7 @@ const ProjectForm = () => {
     "React", "Bootstrap", "Tailwind CSS", "Vue.js", "Angular", "Django", "JavaFX", "Express.js",
     "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", 
     "VS Code", "PyCharm", "IntelliJ IDEA",
-    "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub", "Docker", "AWS"
+    "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub", "Docker", "AWS", "GLPI", "Zabbix"
   ];
 
   // When component mounts or id changes, fetch project data if editing
