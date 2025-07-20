@@ -41,7 +41,7 @@ const ProjectForm = () => {
 
   // List of categories/tags user can select from
   const categories = [
-    "C#", "C", "Java", "JavaScript", "TypeScript", "HTML/CSS", "PHP", "Python",
+    "C#", "C", "Java", "JavaScript", "TypeScript", "HTML/CSS", "PHP", "Python", "Powershell",
     "React", "Bootstrap", "Tailwind CSS", "Vue.js", "Angular", "Django", "JavaFX", "Express.js",
     "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", "PL/SQL",
     "VS Code", "PyCharm", "IntelliJ IDEA",
