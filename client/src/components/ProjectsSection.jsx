@@ -48,7 +48,7 @@ export const ProjectsSection = () => {
 												<img
 													key={i}
 													// src={`http://localhost:8000/${image}`}
-													src={`${backendUrl}/${image}`}
+													src={`${image}`}
 													alt={`Image ${i + 1} of ${project.title}`}
 													className="w-full h-full object-cover"
 												/>

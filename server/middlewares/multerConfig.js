@@ -1,35 +1,39 @@
-import multer from "multer"; // Import multer to handle file uploads
+// Import multer, used for handling file uploads
+import multer from "multer";
 
-// Get the current date
-const now = new Date();
+// Import Cloudinary's v2 SDK for uploading files to their servers
+import { v2 as cloudinary } from "cloudinary";
 
-// Extract the day, formatted as two digits (e.g., 01, 12, 30)
-const day = String(now.getDate()).padStart(2, '0');      
+// Import a special storage engine that lets multer talk to Cloudinary
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-// Extract the month, formatted as two digits (e.g., 01, 05, 12)
-// Note: getMonth() is zero-based, so we add 1
-const month = String(now.getMonth() + 1).padStart(2, '0'); 
+// Import dotenv to read environment variables from a .env file
+import dotenv from "dotenv";
 
-// Extract the full year in 4 digits (e.g., 2025)
-const year = now.getFullYear();                          
+// Load environment variables into process.env
+dotenv.config();
 
-// Format the date as "ddmmyyyy" without separators (e.g., "15072025")
-const formattedDate = day + month + year;
-
-// Configure multer storage to use local disk
-const storage = multer.diskStorage({
-    // Destination folder where uploaded files will be stored
-    destination: "./uploads/",
-
-    // Function to set the filename of the stored file
-    // Prefix the original filename with the formatted date (e.g., "15072025_myfile.png")
-    filename: (req, file, cb) => {
-        cb(null, formattedDate + '_' + file.originalname);
-    }
+// 🔧 Configure Cloudinary using values from the .env file
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // Your Cloudinary cloud name
+  api_key: process.env.CLOUDINARY_API_KEY,       // Your Cloudinary API key
+  api_secret: process.env.CLOUDINARY_API_SECRET, // Your Cloudinary API secret
 });
 
-// Create multer middleware with the defined storage configuration
+// 🎯 Set up the Cloudinary storage engine for multer
+const storage = new CloudinaryStorage({
+  cloudinary, // Pass in the cloudinary instance
+
+  // Define how files will be stored in your Cloudinary account
+  params: {
+    folder: "portfolio",                  // Folder name in your Cloudinary dashboard
+    allowed_formats: ["jpg", "jpeg", "png", "webp"], // Allowed image formats
+    transformation: [{ width: 1200, crop: "limit" }], // Optional: resize images if too big
+  },
+});
+
+// 🎒 Create the multer middleware using the Cloudinary storage config
 const upload = multer({ storage });
 
-// Export the middleware for use in routes
+// 🚀 Export the upload middleware so you can use it in your routes
 export default upload;

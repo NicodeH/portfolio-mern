@@ -45,7 +45,7 @@ const ProjectForm = () => {
     "React", "Bootstrap", "Tailwind CSS", "Vue.js", "Angular", "Django", "JavaFX", "Express.js",
     "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", 
     "VS Code", "PyCharm", "IntelliJ IDEA",
-    "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub", "Docker", "AWS", "GLPI", "Zabbix"
+    "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub", "Docker", "AWS", "GLPI", "Zabbix", "Cloudinary"
   ];
 
   // When component mounts or id changes, fetch project data if editing
@@ -210,7 +210,7 @@ const ProjectForm = () => {
               <div key={image.id || image} className="flex flex-col items-center space-y-2">
                 <img
                   // src={`http://localhost:8000/${image}`}
-                  src={`${backendUrl}/${image}`}
+                  src={`${image}`}
                   alt="preview"
                   className="w-32 h-32 object-cover rounded-lg border"
                 />
