@@ -19,4 +19,4 @@ portfolio-mern/
 - **Autres** : JWT pour l’auth, dotenv, nodemon, multer, render (pour le hosting)
 
 ## URL du portfolio
-Lien : 
+Lien : https://portfolio-mern-frontend-bk2d.onrender.com
