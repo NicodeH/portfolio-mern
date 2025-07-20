@@ -210,7 +210,7 @@ const ProjectForm = () => {
               <div key={image.id || image} className="flex flex-col items-center space-y-2">
                 <img
                   // src={`http://localhost:8000/${image}`}
-                  src={`${viteUrl}/${image}`}
+                  src={`${backendUrl}/${image}`}
                   alt="preview"
                   className="w-32 h-32 object-cover rounded-lg border"
                 />
