@@ -43,7 +43,7 @@ const ProjectForm = () => {
   const categories = [
     "C#", "C", "Java", "JavaScript", "TypeScript", "HTML/CSS", "PHP", "Python",
     "React", "Bootstrap", "Tailwind CSS", "Vue.js", "Angular", "Django", "JavaFX", "Express.js",
-    "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", 
+    "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", "PL/SQL",
     "VS Code", "PyCharm", "IntelliJ IDEA",
     "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub", "Docker", "AWS", "GLPI", "Zabbix", "Cloudinary"
   ];
