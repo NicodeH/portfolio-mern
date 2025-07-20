@@ -55,11 +55,12 @@ export const ProjectsSection = () => {
 										))
 										: [
 												<img
-													key="placeholder"
-													src="/assets/placeholder.png"
-													alt="Placeholder"
-													className="w-full h-full object-cover"
-												/>,
+													key={i}
+													src={image}
+													alt={`Image ${i + 1} of ${project.title}`}
+													className="w-full h-48 object-contain bg-black rounded-t-xl"
+												/>
+
 										]}
 								</Carousel>
 							</div>

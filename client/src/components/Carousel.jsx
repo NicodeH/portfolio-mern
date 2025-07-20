@@ -33,9 +33,10 @@ export default function Carousel({ children: images }) {
 				{/* Loop over all images and render them */}
 				{images.map((img, i) => (
 					// Each image takes full width of the carousel
-					<div key={i} className="w-full flex-shrink-0 h-full">
+					<div key={i} className="w-full flex-shrink-0 h-full flex items-center justify-center bg-black">
 						{img}
 					</div>
+
 				))}
 			</div>
 
