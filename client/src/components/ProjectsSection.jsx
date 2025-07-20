@@ -55,7 +55,6 @@ export const ProjectsSection = () => {
 										))
 										: [
 												<img
-													key={i}
 													src="../assets/placeholder.png"
 													alt="Image placeholder"
 													className="w-full h-full object-cover"
