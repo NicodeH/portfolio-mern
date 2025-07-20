@@ -8,8 +8,8 @@
 ## 📁 Structure du Projet
 
 portfolio-mern/ \
-├── client/ # Frontend : React \
-├── server/ # Backend : Node.js + Express
+├── client/ : Frontend  \
+├── server/ : Backend 
 
 
 ---
