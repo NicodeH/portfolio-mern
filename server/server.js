@@ -25,9 +25,6 @@ app.use(cors({
 app.use(bodyParser.json()); // Tell Express to parse incoming JSON request bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Also parse URL-encoded form data
 
-// Serve static files (images, uploads, etc.) from the "uploads" folder when requested
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 // Set up routes for authentication and projects, both under the "/api" prefix
 app.use("/api/auth", authRoute);
 app.use("/api/project", route);

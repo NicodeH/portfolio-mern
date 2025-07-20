@@ -1,50 +1,49 @@
-// Import the Project model from Mongoose schema
+// Import the Project Mongoose model
 import Project from '../model/projectModel.js';
 
 // ================= CREATE NEW PROJECT =================
 export const create = async (req, res) => {
     try {
-        // Log the incoming data for debugging
+        // Log the received form data (for debugging)
         console.log("BODY:", req.body);
-        console.log("FILES:", req.files);
+        console.log("FILES:", req.files); // Cloudinary files
 
-        // Extract fields from request body
+        // Destructure values from request body
         const { title, description, demoUrl, githubUrl, tags } = req.body;
 
-        // Try to parse tags if sent as JSON string, fallback to array
+        // Parse the tags if they are sent as a JSON string
         let parsedTags = [];
         try {
-            parsedTags = JSON.parse(tags);
+            parsedTags = JSON.parse(tags); // Expecting '["React", "Node.js"]'
         } catch (err) {
             parsedTags = Array.isArray(tags) ? tags : [tags];
         }
 
-        // Extract image file paths from multer
+        // Extract Cloudinary URLs from uploaded files
         const images = req.files ? req.files.map((file) => file.path) : [];
 
-        // Create a new project instance with the data
-        const newProject = new Project({
-            title,
-            description,
-            images,
-            demoUrl,
-            githubUrl,
-            tags: parsedTags,
-        });
-
-        // Prevent duplicates: check if project with same title already exists
+        // Check if a project with the same title already exists
         const projectExist = await Project.findOne({ title });
         if (projectExist) {
             return res.status(400).json({ message: 'Project already exist.' });
         }
 
-        // Save to database
+        // Create and save the new project
+        const newProject = new Project({
+            title,
+            description,
+            images, // Cloudinary image URLs
+            demoUrl,
+            githubUrl,
+            tags: parsedTags,
+        });
+
         await newProject.save();
 
-        // Respond with success
         res.status(200).json({ message: 'Project added.' });
+
     } catch (error) {
-        // Catch unexpected errors
+        console.error("Error in create:", error);
         res.status(500).json({ errorMessage: error.message });
     }
 };
@@ -52,15 +51,12 @@ export const create = async (req, res) => {
 // ================= GET ALL PROJECTS =================
 export const getAllProject = async (req, res) => {
     try {
-        // Fetch all projects
         const projectData = await Project.find();
 
-        // Return 404 if none found
         if (!projectData || projectData.length === 0) {
             return res.status(404).json({ message: "Project data not found" });
         }
 
-        // Return project data
         res.status(200).json(projectData);
     } catch (error) {
         res.status(500).json({ errorMessage: error.message });
@@ -70,14 +66,13 @@ export const getAllProject = async (req, res) => {
 // ================= GET PROJECT BY ID =================
 export const getProjectById = async (req, res) => {
     try {
-        const id = req.params.id; // Extract ID from URL
-        const projectExist = await Project.findById(id); // Find project by ID
+        const id = req.params.id;
+        const projectExist = await Project.findById(id);
 
         if (!projectExist) {
             return res.status(404).json({ message: "Project not found" });
         }
 
-        // Return found project
         res.status(200).json(projectExist);
     } catch (error) {
         res.status(500).json({ errorMessage: error.message });
@@ -87,7 +82,7 @@ export const getProjectById = async (req, res) => {
 // ================= UPDATE PROJECT =================
 export const update = async (req, res) => {
     try {
-        const id = req.params.id; // Extract ID
+        const id = req.params.id;
 
         // Check if project exists
         const projectExist = await Project.findById(id);
@@ -97,7 +92,7 @@ export const update = async (req, res) => {
 
         const { title, description, demoUrl, githubUrl, tags, existingImages } = req.body;
 
-        // Parse tags if stringified JSON
+        // Parse the tags
         let parsedTags = [];
         try {
             parsedTags = typeof tags === 'string' ? JSON.parse(tags) : tags;
@@ -105,7 +100,7 @@ export const update = async (req, res) => {
             parsedTags = Array.isArray(tags) ? tags : [tags];
         }
 
-        // Parse previously saved images
+        // Parse the existing images the user wants to keep
         let parsedExistingImages = [];
         try {
             parsedExistingImages = typeof existingImages === 'string'
@@ -115,14 +110,14 @@ export const update = async (req, res) => {
             parsedExistingImages = [];
         }
 
-        // Get new uploaded images from multer
+        // Get the newly uploaded Cloudinary image URLs
         const uploadedImages = req.files?.map(file => file.path) || [];
 
-        // Merge existing and new images
+        // Combine existing + new images
         const finalImages = [...parsedExistingImages, ...uploadedImages];
 
-        // Update the project
-        const updatedProject = await Project.findByIdAndUpdate(
+        // Update the project in the database
+        await Project.findByIdAndUpdate(
             id,
             {
                 title,
@@ -132,12 +127,13 @@ export const update = async (req, res) => {
                 tags: parsedTags,
                 images: finalImages,
             },
-            { new: true } // Return the updated project
+            { new: true }
         );
 
         res.status(200).json({ message: "Project updated successfully." });
 
     } catch (error) {
+        console.error("Error in update:", error);
         res.status(500).json({ errorMessage: error.message });
     }
 };
@@ -145,14 +141,13 @@ export const update = async (req, res) => {
 // ================= DELETE PROJECT =================
 export const deleteProjectById = async (req, res) => {
     try {
-        const id = req.params.id; // Get project ID
-        const projectExist = await Project.findById(id); // Check if it exists
+        const id = req.params.id;
+        const projectExist = await Project.findById(id);
 
         if (!projectExist) {
             return res.status(404).json({ message: "Project not found" });
         }
 
-        // Delete the project from DB
         await Project.findByIdAndDelete(id);
 
         res.status(200).json({ message: "Project deleted successfully." });
