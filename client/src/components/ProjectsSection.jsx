@@ -56,9 +56,9 @@ export const ProjectsSection = () => {
 										: [
 												<img
 													key={i}
-													src={image}
-													alt={`Image ${i + 1} of ${project.title}`}
-													className="w-full h-48 object-contain bg-black rounded-t-xl"
+													src="../assets/placeholder.png"
+													alt="Image placeholder"
+													className="w-full h-full object-cover"
 												/>
 
 										]}
