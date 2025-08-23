@@ -43,24 +43,24 @@ export const ProjectsSection = () => {
 						>
 							<div className="max-w-lg">
 								<Carousel>
-									{project.images?.length > 0
-										? project.images.map((image, i) => (
-												<img
-													key={i}
-													src={`${image}`}
-													alt={`Image ${i + 1} of ${project.title}`}
-													className="w-full h-64 md:h-80 lg:h-64 object-contain bg-black"
-												/>
-										))
-										: [
-												<img
-													src="../assets/placeholder.png"
-													alt="Image placeholder"
-													className="w-full h-full object-cover"
-												/>
-
-										]}
+								{project.images?.length > 0
+									? project.images.map((image, i) => (
+										<img
+										key={i}
+										src={`${image}`}
+										alt={`Image ${i + 1} of ${project.title}`}
+										className="w-full h-64 md:h-80 lg:h-96 object-contain bg-black"
+										/>
+									))
+									: [
+										<img
+										src="../assets/placeholder.png"
+										alt="Image placeholder"
+										className="w-full h-64 md:h-80 lg:h-96 object-contain bg-black"
+										/>
+									]}
 								</Carousel>
+
 							</div>
 
 							<div className="p-6">
