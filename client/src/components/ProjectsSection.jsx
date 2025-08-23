@@ -47,10 +47,9 @@ export const ProjectsSection = () => {
 										? project.images.map((image, i) => (
 												<img
 													key={i}
-													// src={`http://localhost:8000/${image}`}
 													src={`${image}`}
 													alt={`Image ${i + 1} of ${project.title}`}
-													className="w-full h-full object-cover"
+													className="w-full h-64 md:h-80 lg:h-64 object-contain bg-black"
 												/>
 										))
 										: [
