@@ -4,7 +4,7 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import Carousel from "./Carousel";
 
 const backendUrl = import.meta.env.VITE_URL;
-
+ 
 // Create an axios instance with default config:
 // - baseURL is the backend API URL
 const axiosInstance = axios.create({
