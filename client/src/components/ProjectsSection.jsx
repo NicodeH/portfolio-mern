@@ -43,24 +43,25 @@ export const ProjectsSection = () => {
 						>
 							<div className="max-w-lg">
 								<Carousel>
-									{project.images?.length > 0
-										? project.images.map((image, i) => (
+									{project.images?.length > 0 ? (
+										project.images.map((image, i) => (
+											<div key={i} className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden">
 												<img
-													key={i}
-													// src={`http://localhost:8000/${image}`}
 													src={`${image}`}
 													alt={`Image ${i + 1} of ${project.title}`}
 													className="w-full h-full object-cover"
 												/>
+											</div>
 										))
-										: [
-												<img
-													src="../assets/placeholder.png"
-													alt="Image placeholder"
-													className="w-full h-full object-cover"
-												/>
-
-										]}
+									) : (
+										<div className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden">
+											<img
+												src="../assets/placeholder.png"
+												alt="Image placeholder"
+												className="w-full h-full object-cover"
+											/>
+										</div>
+									)}
 								</Carousel>
 							</div>
 
