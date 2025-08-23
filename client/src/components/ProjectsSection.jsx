@@ -7,7 +7,6 @@ import Carousel from "./Carousel";
 const backendUrl = import.meta.env.VITE_URL;
 
 // Create an axios instance with default configuration
-// ✅ baseURL points to the backend API
 const axiosInstance = axios.create({
     baseURL: `${backendUrl}`,
 });
@@ -21,8 +20,15 @@ export const ProjectsSection = () => {
                 // Fetch all projects from the API
                 const response = await axiosInstance.get("/api/project/all-projects");
 
-                // Normalize data to ensure images and tags are always arrays
-                const normalizedProjects = response.data.map((p) => ({
+                // Make sure response.data is an array
+                const dataArray = Array.isArray(response.data)
+                    ? response.data
+                    : Array.isArray(response.data.projects)
+                    ? response.data.projects
+                    : [];
+
+                // Normalize each project: ensure images and tags are arrays
+                const normalizedProjects = dataArray.map((p) => ({
                     ...p,
                     images: Array.isArray(p.images) ? p.images : [],
                     tags: Array.isArray(p.tags) ? p.tags : [],
@@ -33,6 +39,7 @@ export const ProjectsSection = () => {
                 console.error("Error while fetching data", error);
             }
         };
+
         fetchData();
     }, []);
 
@@ -44,85 +51,94 @@ export const ProjectsSection = () => {
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <div
-                            key={project._id || index}
-                            className="group bg-card text-muted-foreground rounded-xl overflow-hidden border border-border shadow-md hover:shadow-lg transition duration-300"
-                        >
-                            <div className="max-w-lg">
-                                <Carousel>
-                                    {/* Display project images or a placeholder if none */}
-                                    {Array.isArray(project.images) && project.images.length > 0 ? (
-                                        project.images.map((image, i) => (
-                                            <div key={i} className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden">
+                    {/* Only map if projects is a valid array */}
+                    {Array.isArray(projects) && projects.length > 0 ? (
+                        projects.map((project, index) => (
+                            <div
+                                key={project._id || index}
+                                className="group bg-card text-muted-foreground rounded-xl overflow-hidden border border-border shadow-md hover:shadow-lg transition duration-300"
+                            >
+                                <div className="max-w-lg">
+                                    <Carousel>
+                                        {/* Display project images or placeholder */}
+                                        {Array.isArray(project.images) && project.images.length > 0 ? (
+                                            project.images.map((image, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden"
+                                                >
+                                                    <img
+                                                        src={image}
+                                                        alt={`Image ${i + 1} of ${project.title}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden">
                                                 <img
-                                                    src={image}
-                                                    alt={`Image ${i + 1} of ${project.title}`}
+                                                    src="../assets/placeholder.png"
+                                                    alt="Image placeholder"
                                                     className="w-full h-full object-cover"
                                                 />
                                             </div>
-                                        ))
-                                    ) : (
-                                        <div className="w-full h-64 sm:h-72 md:h-80 lg:h-64 overflow-hidden">
-                                            <img
-                                                src="../assets/placeholder.png"
-                                                alt="Image placeholder"
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                    )}
-                                </Carousel>
-                            </div>
-
-                            <div className="p-6">
-                                {/* Display project tags */}
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {Array.isArray(project.tags) &&
-                                        project.tags.map((tag, i) => (
-                                            <span
-                                                key={i}
-                                                className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
+                                        )}
+                                    </Carousel>
                                 </div>
 
-                                {/* Project title */}
-                                <h3 className="text-xl font-semibold text-white mb-1">{project.title}</h3>
+                                <div className="p-6">
+                                    {/* Display project tags */}
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {Array.isArray(project.tags) &&
+                                            project.tags.map((tag, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                    </div>
 
-                                {/* Project description */}
-                                <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+                                    {/* Project title */}
+                                    <h3 className="text-xl font-semibold text-white mb-1">{project.title}</h3>
 
-                                {/* Links to demo and GitHub */}
-                                <div className="flex justify-between items-center">
-                                    <div className="flex space-x-3">
-                                        {project.demoUrl && (
-                                            <a
-                                                href={project.demoUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-gray-300 hover:text-primary"
-                                            >
-                                                <ExternalLink size={20} />
-                                            </a>
-                                        )}
+                                    {/* Project description */}
+                                    <p className="text-gray-300 text-sm mb-4">{project.description}</p>
 
-                                        {project.githubUrl && (
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-gray-300 hover:text-primary"
-                                            >
-                                                <Github size={20} />
-                                            </a>
-                                        )}
+                                    {/* Links to demo and GitHub */}
+                                    <div className="flex justify-between items-center">
+                                        <div className="flex space-x-3">
+                                            {project.demoUrl && (
+                                                <a
+                                                    href={project.demoUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-gray-300 hover:text-primary"
+                                                >
+                                                    <ExternalLink size={20} />
+                                                </a>
+                                            )}
+                                            {project.githubUrl && (
+                                                <a
+                                                    href={project.githubUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-gray-300 hover:text-primary"
+                                                >
+                                                    <Github size={20} />
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-400 col-span-full">
+                            No projects found.
+                        </p>
+                    )}
                 </div>
 
                 {/* Link to general GitHub profile */}
