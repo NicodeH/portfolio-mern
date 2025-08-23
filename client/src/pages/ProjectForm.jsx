@@ -41,11 +41,16 @@ const ProjectForm = () => {
 
   // List of categories/tags user can select from
   const categories = [
-    "C#", "C", "Java", "JavaScript", "TypeScript", "HTML/CSS", "PHP", "Python", "Powershell", "GDScript",
-    "React", "Bootstrap", "Tailwind CSS", "Vue.js", "Angular", "Django", "JavaFX", "Express.js",
-    "PostgreSQL", "MySQL", "Oracle SQL", "MongoDB", "PL/SQL",
-    "VS Code", "PyCharm", "IntelliJ IDEA", 
-    "phpMyAdmin", "Node.js", "API Rest", "Junit", "Multer", "JWT", "Git/GitHub/Framagit", "Docker", "AWS", "GLPI", "Zabbix", "Cloudinary", "Godot", "Winget"
+    "API Rest", "Angular", "ASP.NET Core MVC", "AWS", "Bootstrap",
+    "C", "C#", "Cloudinary", "Docker", "Django",
+    "Express.js", "GDScript", "Git/GitHub/Framagit", "GLPI", "Godot",
+    "HTML/CSS", "IntelliJ IDEA", "Java", "JavaFX", "JavaScript",
+    "JWT", "Junit", "Matplotlib", "MongoDB", "Multer", 
+    "MySQL", "Node.js", "Numpy", "Oracle SQL", "PHP",
+    "PL/SQL", "Pandas", "PostgreSQL", "PyCharm", "Powershell",
+    "Python", "React", "Scikit-learn", "SQLite", "Tailwind CSS",
+    "TypeScript", "VS Code", "Visual Studio", "Vue.js", "Winget", "Zabbix",
+    "phpMyAdmin"
   ];
 
   // When component mounts or id changes, fetch project data if editing

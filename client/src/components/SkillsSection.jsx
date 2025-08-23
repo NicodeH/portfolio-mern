@@ -4,28 +4,33 @@ import { cn } from "@/lib/utils"   // Import a utility function for class names 
 // List of skills, each with a name, level (percentage), and category
 const skills = [
     // Languages
-    { name: "C#", level: 50, category: "language" },
+    { name: "C#", level: 70, category: "language" },
     { name: "C", level: 60, category: "language" },
-    { name: "Java", level: 80, category: "language" },
+    { name: "Java", level: 90, category: "language" },
     { name: "JavaScript", level: 50, category: "language" },
     { name: "TypeScript", level: 60, category: "language" },
     { name: "HTML/CSS", level: 70, category: "language" },
     { name: "PHP", level: 80, category: "language" },
-    { name: "Python", level: 65, category: "language" },
+    { name: "Python", level: 70, category: "language" },
+    { name: "Godot", level: 60, category: "language" },
 
     // Frameworks
-    { name: "React", level: 70, category: "framework" },
-    { name: "Bootstrap", level: 80, category: "framework" },
+    { name: "ASP.NET Core MVC", level: 60, category: "framework" },
+    { name: "Express.js", level: 70, category: "framework" },
+    { name: "React", level: 80, category: "framework" },
+    { name: "Bootstrap", level: 70, category: "framework" },
     { name: "Tailwind CSS", level: 50, category: "framework" },
     { name: "Vue.js", level: 60, category: "framework" },
-    { name: "Angular", level: 80, category: "framework" },
+    { name: "Angular", level: 70, category: "framework" },
     { name: "Django", level: 60, category: "framework" },
-    { name: "JavaFX", level: 65, category: "framework" },
+    { name: "JavaFX", level: 70, category: "framework" },
 
     // Database
-    { name: "PostgreSQL", level: 60, category: "database" },
+    { name: "PostgreSQL", level: 70, category: "database" },
+    { name: "PL/SQL", level: 70, category: "database" },
     { name: "MySQL", level: 70, category: "database" },
-    { name: "Oracle SQL", level: 85, category: "database" },
+    { name: "SQLite", level: 60, category: "database" },
+    { name: "Oracle SQL", level: 90, category: "database" },
 
     // Tools
     { name: "Git/GitHub", level: 70, category: "tools" },
@@ -34,9 +39,9 @@ const skills = [
     { name: "phpMyAdmin", level: 70, category: "tools" },
 
     // Others
-    { name: "Node.js", level: 50, category: "other" },
-    { name: "API Rest", level: 65, category: "other" },
-    { name: "Junit", level: 75, category: "other" },
+    { name: "Node.js", level: 70, category: "other" },
+    { name: "API Rest", level: 70, category: "other" },
+    { name: "Junit", level: 80, category: "other" },
 ];
 
 // List of categories for filtering
