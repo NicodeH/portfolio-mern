@@ -21,7 +21,7 @@ export const ProjectsSection = () => {
                 // Fetch all projects from the API
                 const response = await axiosInstance.get("/api/project/all-projects");
 
-                // ✅ Normalize data to ensure images and tags are always arrays
+                // Normalize data to ensure images and tags are always arrays
                 const normalizedProjects = response.data.map((p) => ({
                     ...p,
                     images: Array.isArray(p.images) ? p.images : [],
