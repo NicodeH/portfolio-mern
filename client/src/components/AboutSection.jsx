@@ -1,4 +1,5 @@
 import { GraduationCap, School } from "lucide-react"; // Import some icons from an icon library
+import cv from "../assets/CV.pdf";
 
 // This is the AboutSection component
 export const AboutSection = () => {
@@ -35,8 +36,9 @@ export const AboutSection = () => {
               </a>
 
               <a
-                href=""
+                href={cv}
                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                download="cv"
               >
                 Download CV
               </a>
